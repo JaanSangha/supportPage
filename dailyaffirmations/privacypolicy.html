@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Daily Affirmations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .effective-date {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin: 30px 0 15px 0;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #34495e;
+            margin: 20px 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin: 15px 0 15px 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .contact-info {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+        }
+
+        .contact-info h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .email-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Privacy Policy</h1>
+            <p>Daily Affirmations</p>
+        </div>
+
+        <div class="content">
+            <div class="effective-date">
+                Effective Date: <span id="currentDate"></span>
+            </div>
+
+            <p>Daily Affirmations ("the App") respects your privacy. This policy explains how we handle information when you use the App.</p>
+
+            <h2>Information We Do Not Collect</h2>
+            <p>The App does not collect, store, or share any personal information. We do not request your name, email, location, or any other identifying data.</p>
+
+            <h2>How the App Works</h2>
+            <p>The App simply displays pre-written positive affirmations. No user profiles are created, and no analytics or advertising networks are integrated.</p>
+
+            <h2>Third-Party Services</h2>
+            <p>The App does not use third-party services that collect information.</p>
+
+            <h2>Children's Privacy</h2>
+            <p>The App is safe for all ages and does not knowingly collect information from children.</p>
+
+            <h2>Changes to This Policy</h2>
+            <p>If we change our privacy practices, we will update this page with the new policy and effective date.</p>
+
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>If you have questions or concerns about this policy, please email <a href="mailto:jaansangha10@gmail.com" class="email-link">jaansangha10@gmail.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; <span id="currentYear"></span> Jaan Sangha Apps. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Set current date dynamically
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+
+        // Set current year dynamically
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
