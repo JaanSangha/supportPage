@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Center - Jaan Sangha Apps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .products-section, .contact-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .product-list {
+            list-style: none;
+        }
+
+        .product-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .product-item:hover {
+            background: #e3f2fd;
+            transform: translateX(5px);
+        }
+
+        .product-item.selected {
+            background: #3498db;
+            color: white;
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Support Center</h1>
+            <p>Get help with your apps and reach out to our support team</p>
+        </div>
+
+        <div class="main-content">
+            <div class="products-section">
+                <h2 class="section-title">Select Your App</h2>
+                <ul class="product-list">
+                    <li class="product-item" data-product="app1">
+                        <div class="product-name">Daily Affirmations</div>
+                        <div class="product-description">Welcome to the official support page for Daily Affirmations.</div>
+                    </li>
+                    <li class="product-item" data-product="app2">
+                        <div class="product-name">My App 2</div>
+                        <div class="product-description">Description of your second app</div>
+                    </li>
+                    <li class="product-item" data-product="app3">
+                        <div class="product-name">My App 3</div>
+                        <div class="product-description">Description of your third app</div>
+                    </li>
+                    <li class="product-item" data-product="other">
+                        <div class="product-name">Other/General Inquiry</div>
+                        <div class="product-description">General support or other questions</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="contact-section">
+                <h2 class="section-title">Contact Support</h2>
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Your Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product">Selected App *</label>
+                        <select id="product" name="product" required>
+                            <option value="">Please select an app first</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" placeholder="Please describe your issue or question in detail..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Send Support Request
+                    </button>
+
+                    <div class="success-message" id="successMessage">
+                        Thank you! Your support request has been sent successfully. We'll get back to you soon.
+                    </div>
+
+                    <div class="error-message" id="errorMessage">
+                        Sorry, there was an error sending your message. Please try again or contact us directly at jaansangha10@gmail.com
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; <span id="currentYear"></span> Jaan Sangha Apps. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Set current year dynamically
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Product selection functionality
+        const productItems = document.querySelectorAll('.product-item');
+        const productSelect = document.getElementById('product');
+        const selectedProduct = { name: '', value: '' };
+
+        // Product data
+        const products = {
+            'app1': 'My App 1',
+            'app2': 'My App 2', 
+            'app3': 'My App 3',
+            'other': 'Other/General Inquiry'
+        };
+
+        // Handle product selection
+        productItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove selected class from all items
+                productItems.forEach(i => i.classList.remove('selected'));
+                
+                // Add selected class to clicked item
+                item.classList.add('selected');
+                
+                // Get product data
+                const productValue = item.dataset.product;
+                const productName = item.querySelector('.product-name').textContent;
+                
+                selectedProduct.name = productName;
+                selectedProduct.value = productValue;
+                
+                // Update select dropdown
+                productSelect.innerHTML = `<option value="${productValue}">${productName}</option>`;
+            });
+        });
+
+        // Form submission
+        document.getElementById('supportForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // Get form data
+            const formData = new FormData(e.target);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                product: selectedProduct.name,
+                subject: formData.get('subject'),
+                message: formData.get('message')
+            };
+            
+            try {
+                // Create mailto link with form data
+                const subject = `Support Request: ${data.subject} - ${data.product}`;
+                const body = `
+Name: ${data.name}
+Email: ${data.email}
+App: ${data.product}
+Subject: ${data.subject}
+
+Message:
+${data.message}
+                `.trim();
+                
+                const mailtoLink = `mailto:jaansangha10@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                // Open email client
+                window.location.href = mailtoLink;
+                
+                // Show success message
+                successMessage.style.display = 'block';
+                
+                // Reset form
+                e.target.reset();
+                productItems.forEach(item => item.classList.remove('selected'));
+                productSelect.innerHTML = '<option value="">Please select an app first</option>';
+                selectedProduct.name = '';
+                selectedProduct.value = '';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.style.display = 'block';
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Support Request';
+            }
+        });
+
+        // Form validation
+        document.getElementById('supportForm').addEventListener('input', (e) => {
+            const submitBtn = document.getElementById('submitBtn');
+            const requiredFields = ['name', 'email', 'subject', 'message'];
+            const allFieldsFilled = requiredFields.every(field => {
+                const element = document.getElementById(field);
+                return element.value.trim() !== '';
+            });
+            
+            const productSelected = selectedProduct.value !== '';
+            
+            submitBtn.disabled = !(allFieldsFilled && productSelected);
+        });
+    </script>
+</body>
+</html>
