@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support Center - Jaan Sangha Apps</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -43,17 +44,18 @@
         }
 
         .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            display: flex;
+            justify-content: center;
             margin-bottom: 40px;
         }
 
-        .products-section, .contact-section {
+        .contact-section {
             background: white;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 600px;
         }
 
         .section-title {
@@ -64,40 +66,6 @@
             padding-bottom: 10px;
         }
 
-        .product-list {
-            list-style: none;
-        }
-
-        .product-item {
-            padding: 15px;
-            margin: 10px 0;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .product-item:hover {
-            background: #e3f2fd;
-            transform: translateX(5px);
-        }
-
-        .product-item.selected {
-            background: #3498db;
-            color: white;
-        }
-
-        .product-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-
-        .product-description {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
 
         .form-group {
             margin-bottom: 20px;
@@ -207,28 +175,6 @@
         </div>
 
         <div class="main-content">
-            <div class="products-section">
-                <h2 class="section-title">Select Your App</h2>
-                <ul class="product-list">
-                    <li class="product-item" data-product="app1">
-                        <div class="product-name">Daily Affirmations</div>
-                        <div class="product-description">Welcome to the official support page for Daily Affirmations.</div>
-                    </li>
-                    <li class="product-item" data-product="app2">
-                        <div class="product-name">My App 2</div>
-                        <div class="product-description">Description of your second app</div>
-                    </li>
-                    <li class="product-item" data-product="app3">
-                        <div class="product-name">My App 3</div>
-                        <div class="product-description">Description of your third app</div>
-                    </li>
-                    <li class="product-item" data-product="other">
-                        <div class="product-name">Other/General Inquiry</div>
-                        <div class="product-description">General support or other questions</div>
-                    </li>
-                </ul>
-            </div>
-
             <div class="contact-section">
                 <h2 class="section-title">Contact Support</h2>
                 <form id="supportForm">
@@ -243,9 +189,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="product">Selected App *</label>
+                        <label for="product">Select Your App *</label>
                         <select id="product" name="product" required>
-                            <option value="">Please select an app first</option>
+                            <option value="">Please select an app</option>
+                            <option value="Daily Affirmations">Daily Affirmations</option>
+                            <option value="My App 2">My App 2</option>
+                            <option value="My App 3">My App 3</option>
+                            <option value="Other/General Inquiry">Other/General Inquiry</option>
                         </select>
                     </div>
 
@@ -280,42 +230,16 @@
     </div>
 
     <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("wfudyyuwpgDA-w90B");
+        })();
+
         // Set current year dynamically
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
         // Product selection functionality
-        const productItems = document.querySelectorAll('.product-item');
         const productSelect = document.getElementById('product');
-        const selectedProduct = { name: '', value: '' };
-
-        // Product data
-        const products = {
-            'app1': 'My App 1',
-            'app2': 'My App 2', 
-            'app3': 'My App 3',
-            'other': 'Other/General Inquiry'
-        };
-
-        // Handle product selection
-        productItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Remove selected class from all items
-                productItems.forEach(i => i.classList.remove('selected'));
-                
-                // Add selected class to clicked item
-                item.classList.add('selected');
-                
-                // Get product data
-                const productValue = item.dataset.product;
-                const productName = item.querySelector('.product-name').textContent;
-                
-                selectedProduct.name = productName;
-                selectedProduct.value = productValue;
-                
-                // Update select dropdown
-                productSelect.innerHTML = `<option value="${productValue}">${productName}</option>`;
-            });
-        });
 
         // Form submission
         document.getElementById('supportForm').addEventListener('submit', async (e) => {
@@ -338,38 +262,29 @@
             const data = {
                 name: formData.get('name'),
                 email: formData.get('email'),
-                product: selectedProduct.name,
+                product: formData.get('product'),
                 subject: formData.get('subject'),
                 message: formData.get('message')
             };
             
             try {
-                // Create mailto link with form data
-                const subject = `Support Request: ${data.subject} - ${data.product}`;
-                const body = `
-Name: ${data.name}
-Email: ${data.email}
-App: ${data.product}
-Subject: ${data.subject}
+                // Send email using EmailJS
+                const templateParams = {
+                    name: data.name,
+                    email: data.email,
+                    app_name: data.product,
+                    subject: data.subject,
+                    message: data.message,
+                    time: new Date().toLocaleString()
+                };
 
-Message:
-${data.message}
-                `.trim();
-                
-                const mailtoLink = `mailto:jaansangha10@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                
-                // Open email client
-                window.location.href = mailtoLink;
+                await emailjs.send('service_4dt8h0p', 'template_kiww19l', templateParams);
                 
                 // Show success message
                 successMessage.style.display = 'block';
                 
                 // Reset form
                 e.target.reset();
-                productItems.forEach(item => item.classList.remove('selected'));
-                productSelect.innerHTML = '<option value="">Please select an app first</option>';
-                selectedProduct.name = '';
-                selectedProduct.value = '';
                 
             } catch (error) {
                 console.error('Error:', error);
@@ -384,15 +299,13 @@ ${data.message}
         // Form validation
         document.getElementById('supportForm').addEventListener('input', (e) => {
             const submitBtn = document.getElementById('submitBtn');
-            const requiredFields = ['name', 'email', 'subject', 'message'];
+            const requiredFields = ['name', 'email', 'product', 'subject', 'message'];
             const allFieldsFilled = requiredFields.every(field => {
                 const element = document.getElementById(field);
                 return element.value.trim() !== '';
             });
             
-            const productSelected = selectedProduct.value !== '';
-            
-            submitBtn.disabled = !(allFieldsFilled && productSelected);
+            submitBtn.disabled = !allFieldsFilled;
         });
     </script>
 </body>
