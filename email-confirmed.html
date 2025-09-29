@@ -122,6 +122,15 @@
         // Set current year dynamically
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
+        // Clean the URL by removing authentication tokens and fragments
+        function cleanUrl() {
+            if (window.location.hash) {
+                // Remove the hash fragment that contains authentication tokens
+                const cleanUrl = window.location.origin + window.location.pathname;
+                window.history.replaceState({}, document.title, cleanUrl);
+            }
+        }
+
         // Function to close the tab
         function closeTab() {
             // Try to close the tab
@@ -134,6 +143,9 @@
                 }
             }, 100);
         }
+
+        // Clean URL when page loads
+        window.addEventListener('load', cleanUrl);
 
         // Auto-close after 10 seconds (optional)
         // setTimeout(() => {
